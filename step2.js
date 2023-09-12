@@ -8,13 +8,15 @@ const fsP = require("fs/promises");
 argument.
  */
 async function cat(path) {
+  let contents;
+
   try {
-    const contents = await fsP.readFile(path, "utf8");
-    console.log(contents);
+    contents = await fsP.readFile(path, "utf8");
   } catch (err) {
     console.log(`Error reading ${err.path}:
     ${err}`);
   }
+  console.log(contents);
 }
 
 
@@ -22,16 +24,18 @@ async function cat(path) {
 /** webCat: Reads the content of a passed in URL and prints contents to the
  console. */
 async function webCat(url) {
+  let response;
+
   try {
-    const response = await fetch(url);
-    const html = await response.text()
-    debugger;
-    console.log(html);
+    response = await fetch(url);
   }
   catch (err) {
     console.log(`Error fetching ${url}:
     ${err}`);
   }
+
+  const html = await response.text()
+  console.log(html);
 }
 
 
